@@ -1,0 +1,368 @@
+package IONIQ5;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class option extends JFrame {
+
+	JCheckBox[] option_radio = new JCheckBox[55];
+	JLabel option_imageLabel = new JLabel();
+	JLabel sum_Label = new JLabel();
+	String[] option_text = { "주차 충돌방지 보조", "원격 스마트 주차 보조", "서라운드 뷰 모니터", "빌트인 캠", "실내 V2L", "솔라루프", "비전루프", "뒷좌석 승객 알림",
+			"뒷좌석 수동식 도어 커튼", "2열 열선시트", "전좌석 메모리 시트", "2열 전동 슬라이딩 시트", "LED 테일게이트 램프", "전방 충돌방지 보조", "차로 이탈방지 보조",
+			"지능형 속도 제한 보조", "운전자 주의 경고", "하이빔 보조", "스마트 크루즈 컨트롤", "내비게이션 기반 스마트 크루즈 컨트롤", "차로 유지 보조", "고속도로 주행 보조",
+			"후방 교차 충돌방지 보조", "후측방 충돌방지 보조", "안전 하차 보조", "6에어백", "타이어 응급처치 키트	", "개별 타이어 공기압 경보", "주차 거리 경보	",
+			"세이프티 언락", "유아용 시트 고정장치", "가상 엔진 사운드", "다중 충돌방지 자동 제어 시스템", "20인치 휠 & 미쉐린 타이어", "LED 주간주행등", "LED 리어콤비램프",
+			"LED 보조제동등", "충전 표시등", "LED 방향지시등", "스티어링 휠 열선", "엠비언트 무드등", "앞좌석 통풍시트", "천연가죽 시트", "운전석 자세 메모리 시스템",
+			"세이프티 파워 윈도우", "전동식 파킹 브레이크", "후방 모니터", "전동식 트렁크", "전동식 충전구", "증강현실 헤드업 디스플레이", "디지털 키", "스마트폰 무선충전",
+			"하이패스", "레인센서", "BOSE 스피커" };
+	ImageIcon[] option_image = { new ImageIcon("주차 충돌방지 보조.jpeg"), new ImageIcon("원격 스마트 주차 보조.jpeg"),
+			new ImageIcon("서라운드 뷰 모니터.jpeg"), new ImageIcon("빌트인 캠.jpeg"), new ImageIcon("실내 V2L.jpeg"),
+			new ImageIcon("솔라루프.jpeg"), new ImageIcon("비전루프.jpeg"), new ImageIcon("뒷좌석 승객 알림.jpeg"),
+			new ImageIcon("뒷좌석 수동식 도어 커튼.jpeg"), new ImageIcon("2열 열선시트.jpeg"), new ImageIcon("전좌석 메모리 시트.jpeg"),
+			new ImageIcon("2열 전동 슬라이딩 시트.jpeg"), new ImageIcon("LED 테일게이트 램프.jpeg"), new ImageIcon("전방 충돌방지 보조.jpeg"),
+			new ImageIcon("차로 이탈방지 보조.jpeg"), new ImageIcon("지능형 속도 제한 보조.jpeg"), new ImageIcon("운전자 주의 경고.jpeg"),
+			new ImageIcon("하이빔 보조.jpeg"), new ImageIcon("스마트 크루즈 컨트롤.jpeg"), new ImageIcon("내비게이션 기반 스마트 크루즈 컨트롤.jpeg"),
+			new ImageIcon("차로 유지 보조.jpeg"), new ImageIcon("고속도로 주행 보조.jpeg"), new ImageIcon("후방 교차 충돌방지 보조.jpeg"),
+			new ImageIcon("후측방 충돌방지 보조.jpeg"), new ImageIcon("안전 하차 보조.jpeg"), new ImageIcon("6에어백.jpeg"),
+			new ImageIcon("타이어 응급처치 키트.jpeg"), new ImageIcon("개별 타이어 공기압 경보.jpeg"), new ImageIcon("주차 거리 경보.jpeg"),
+			new ImageIcon("세이프티 언락.jpeg"), new ImageIcon("유아용 시트 고정장치.jpeg"), new ImageIcon("가상 엔진 사운드.jpeg"),
+			new ImageIcon("다중 충돌방지 자동 제어 시스템.jpeg"), new ImageIcon("20인치 휠 & 미쉐린 타이어.jpeg"),
+			new ImageIcon("LED 주간주행등.jpeg"), new ImageIcon("LED 리어콤비램프.jpeg"), new ImageIcon("LED 보조제동등.jpeg"),
+			new ImageIcon("충전 표시등.jpeg"), new ImageIcon("LED 방향지시등.jpeg"), new ImageIcon("스티어링 휠 열선.jpeg"),
+			new ImageIcon("엠비언트 무드등.jpeg"), new ImageIcon("앞좌석 통풍시트.jpeg"), new ImageIcon("천연가죽 시트.jpeg"),
+			new ImageIcon("운전석 자세 메모리 시스템.jpeg"), new ImageIcon("세이프티 파워 윈도우.jpeg"), new ImageIcon("전동식 파킹 브레이크.jpeg"),
+			new ImageIcon("후방 모니터.jpeg"), new ImageIcon("전동식 트렁크.jpeg"), new ImageIcon("전동식 충전구.jpeg"),
+			new ImageIcon("증강현실 헤드업 디스플레이.jpeg"), new ImageIcon("디지털 키.jpeg"), new ImageIcon("스마트폰 무선충전.jpeg"),
+			new ImageIcon("하이패스.jpeg"), new ImageIcon("레인센서.jpeg"), new ImageIcon("BOSE 스피커.jpeg") };
+
+	public option() {
+		setTitle("옵션 선택");
+		JPanel option_Panel = new JPanel();
+		JButton option_before = new JButton("이전");
+		setBackground(Color.WHITE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		MyItemListener listener = new MyItemListener();
+		for (int i = 0; i < option_radio.length; i++) {
+			option_radio[i] = new JCheckBox(option_text[i]);
+			option_Panel.add(option_radio[i]);
+			option_radio[i].addItemListener(listener);
+		}
+
+		c.add(option_Panel);
+		c.add(option_imageLabel);
+		c.add(option_before);
+		c.add(sum_Label);
+
+		option_Panel.setLocation(50, 10);
+		option_Panel.setSize(1000, 230);
+		option_imageLabel.setLocation(250, 280);
+		option_imageLabel.setSize(650, 350);
+		option_before.setLocation(50, 680);
+		option_before.setSize(55, 55);
+		sum_Label.setLocation(330, 750);
+		sum_Label.setSize(600, 50);
+
+		setSize(1100, 850);
+		setVisible(true);
+
+		option_before.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new outColor();
+				setVisible(false);
+			}
+		});
+
+	}
+
+	class MyItemListener implements ItemListener {
+		public void itemStateChanged(ItemEvent e) {
+			if (e.getStateChange() == ItemEvent.SELECTED) {
+				if (e.getItem() == option_radio[0]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[0]);
+				} else if (e.getItem() == option_radio[1]) {
+					model.sum += 750000;
+					option_imageLabel.setIcon(option_image[1]);
+				} else if (e.getItem() == option_radio[2]) {
+					model.sum += 800000;
+					option_imageLabel.setIcon(option_image[2]);
+				} else if (e.getItem() == option_radio[3]) {
+					model.sum += 600000;
+					option_imageLabel.setIcon(option_image[3]);
+				} else if (e.getItem() == option_radio[4]) {
+					model.sum += 100000;
+					option_imageLabel.setIcon(option_image[4]);
+				} else if (e.getItem() == option_radio[5]) {
+					model.sum += 1000000;
+					option_imageLabel.setIcon(option_image[5]);
+				} else if (e.getItem() == option_radio[6]) {
+					model.sum += 800000;
+					option_imageLabel.setIcon(option_image[6]);
+				} else if (e.getItem() == option_radio[7]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[7]);
+				} else if (e.getItem() == option_radio[8]) {
+					model.sum += 100000;
+					option_imageLabel.setIcon(option_image[8]);
+				} else if (e.getItem() == option_radio[9]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[9]);
+				} else if (e.getItem() == option_radio[10]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[10]);
+				} else if (e.getItem() == option_radio[11]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[11]);
+				} else if (e.getItem() == option_radio[12]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[12]);
+				} else if (e.getItem() == option_radio[13]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[13]);
+				} else if (e.getItem() == option_radio[14]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[14]);
+				} else if (e.getItem() == option_radio[15]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[15]);
+				} else if (e.getItem() == option_radio[16]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[16]);
+				} else if (e.getItem() == option_radio[17]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[17]);
+				} else if (e.getItem() == option_radio[18]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[18]);
+				} else if (e.getItem() == option_radio[19]) {
+					model.sum += 700000;
+					option_imageLabel.setIcon(option_image[19]);
+				} else if (e.getItem() == option_radio[20]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[20]);
+				} else if (e.getItem() == option_radio[21]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[21]);
+				} else if (e.getItem() == option_radio[22]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[22]);
+				} else if (e.getItem() == option_radio[23]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[23]);
+				} else if (e.getItem() == option_radio[24]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[24]);
+				} else if (e.getItem() == option_radio[25]) {
+					model.sum += 600000;
+					option_imageLabel.setIcon(option_image[25]);
+				} else if (e.getItem() == option_radio[26]) {
+					model.sum += 100000;
+					option_imageLabel.setIcon(option_image[26]);
+				} else if (e.getItem() == option_radio[27]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[27]);
+				} else if (e.getItem() == option_radio[28]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[28]);
+				} else if (e.getItem() == option_radio[29]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[29]);
+				} else if (e.getItem() == option_radio[30]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[30]);
+				} else if (e.getItem() == option_radio[31]) {
+					model.sum += 100000;
+					option_imageLabel.setIcon(option_image[31]);
+				} else if (e.getItem() == option_radio[32]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[32]);
+				} else if (e.getItem() == option_radio[33]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[33]);
+				} else if (e.getItem() == option_radio[34]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[34]);
+				} else if (e.getItem() == option_radio[35]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[35]);
+				} else if (e.getItem() == option_radio[36]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[36]);
+				} else if (e.getItem() == option_radio[37]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[37]);
+				} else if (e.getItem() == option_radio[38]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[38]);
+				} else if (e.getItem() == option_radio[39]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[39]);
+				} else if (e.getItem() == option_radio[40]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[40]);
+				} else if (e.getItem() == option_radio[41]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[41]);
+				} else if (e.getItem() == option_radio[42]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[42]);
+				} else if (e.getItem() == option_radio[43]) {
+					model.sum += 500000;
+					option_imageLabel.setIcon(option_image[43]);
+				} else if (e.getItem() == option_radio[44]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[44]);
+				} else if (e.getItem() == option_radio[45]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[45]);
+				} else if (e.getItem() == option_radio[46]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[46]);
+				} else if (e.getItem() == option_radio[47]) {
+					model.sum += 300000;
+					option_imageLabel.setIcon(option_image[47]);
+				} else if (e.getItem() == option_radio[48]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[48]);
+				} else if (e.getItem() == option_radio[49]) {
+					model.sum += 600000;
+					option_imageLabel.setIcon(option_image[49]);
+				} else if (e.getItem() == option_radio[50]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[50]);
+				} else if (e.getItem() == option_radio[51]) {
+					model.sum += 100000;
+					option_imageLabel.setIcon(option_image[51]);
+				} else if (e.getItem() == option_radio[52]) {
+					model.sum += 100000;
+					option_imageLabel.setIcon(option_image[52]);
+				} else if (e.getItem() == option_radio[53]) {
+					model.sum += 200000;
+					option_imageLabel.setIcon(option_image[53]);
+				} else if (e.getItem() == option_radio[54]) {
+					model.sum += 400000;
+					option_imageLabel.setIcon(option_image[54]);
+				}
+			} else {
+				if (e.getItem() == option_radio[0])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[1])
+					model.sum -= 750000;
+				else if (e.getItem() == option_radio[2])
+					model.sum -= 800000;
+				else if (e.getItem() == option_radio[3])
+					model.sum -= 600000;
+				else if (e.getItem() == option_radio[4])
+					model.sum -= 100000;
+				else if (e.getItem() == option_radio[5])
+					model.sum -= 1000000;
+				else if (e.getItem() == option_radio[6])
+					model.sum -= 800000;
+				else if (e.getItem() == option_radio[7])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[8])
+					model.sum -= 100000;
+				else if (e.getItem() == option_radio[9])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[10])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[11])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[12])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[13])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[14])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[15])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[16])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[17])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[18])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[19])
+					model.sum -= 700000;
+				else if (e.getItem() == option_radio[20])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[21])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[22])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[23])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[24])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[25])
+					model.sum -= 600000;
+				else if (e.getItem() == option_radio[26])
+					model.sum -= 100000;
+				else if (e.getItem() == option_radio[27])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[28])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[29])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[30])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[31])
+					model.sum -= 100000;
+				else if (e.getItem() == option_radio[32])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[33])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[34])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[35])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[36])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[37])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[38])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[39])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[40])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[41])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[42])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[43])
+					model.sum -= 500000;
+				else if (e.getItem() == option_radio[44])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[45])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[46])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[47])
+					model.sum -= 300000;
+				else if (e.getItem() == option_radio[48])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[49])
+					model.sum -= 600000;
+				else if (e.getItem() == option_radio[50])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[51])
+					model.sum -= 100000;
+				else if (e.getItem() == option_radio[52])
+					model.sum -= 100000;
+				else if (e.getItem() == option_radio[53])
+					model.sum -= 200000;
+				else if (e.getItem() == option_radio[54])
+					model.sum -= 400000;
+			}
+			sum_Label.setText("<html>고객님께서 현재까지 선택한 차량의 가격은 " + model.sum + "원 입니다."
+					+ "<br>** 차량의 가격은 할인 및 프로모션 등을 제외한 가격이므로 실구매가는 실제와 다를 수 있습니다. **</html>");
+		}
+	}
+}
