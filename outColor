@@ -1,0 +1,85 @@
+package IONIQ5;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class outColor extends JFrame {
+
+	JRadioButton[] outColor_radio = new JRadioButton[9];
+	JLabel outColor_imageLabel = new JLabel();
+	JLabel sum_Label = new JLabel();
+	String[] outColor_text = { "팬텀 블랙 펄", "갤럭틱 그레이 메탈릭", "디지털 틸 그린 펄", "미스틱 올리브 그린 펄", "사이버 그레이 메탈릭", "아틀라스 화이트",
+			"루시드 블루 펄", "슈팅스타 그레이 매트", "그래비티 골드 매트" };
+	ImageIcon[] outColor_image = { new ImageIcon("팬텀 블랙 펄.jpeg"), new ImageIcon("갤럭틱 그레이 메탈릭.jpeg"),
+			new ImageIcon("디지털 틸 그린 펄.jpeg"), new ImageIcon("미스틱 올리브 그린 펄.jpeg"), new ImageIcon("사이버 그레이 메탈릭.jpeg"),
+			new ImageIcon("아틀라스 화이트.jpeg"), new ImageIcon("루시드 블루 펄.jpeg"), new ImageIcon("슈팅스타 그레이 매트.jpeg"),
+			new ImageIcon("그래비티 골드 매트.jpeg") };
+
+	public outColor() {
+		setTitle("외부 색깔 선택");
+		JPanel outColor_Panel = new JPanel();
+		JButton outColor_next = new JButton("다음");
+		JButton outColor_before = new JButton("이전");
+		setBackground(Color.WHITE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		MyItemListener listener = new MyItemListener();
+		ButtonGroup outColor_group = new ButtonGroup();
+		for (int i = 0; i < outColor_radio.length; i++) {
+			outColor_radio[i] = new JRadioButton(outColor_text[i]);
+			outColor_group.add(outColor_radio[i]);
+			outColor_Panel.add(outColor_radio[i]);
+			outColor_radio[i].addItemListener(listener);
+		}
+
+		c.add(outColor_Panel);
+		c.add(outColor_imageLabel);
+		c.add(outColor_next);
+		c.add(outColor_before);
+		c.add(sum_Label);
+
+		outColor_Panel.setLocation(200, 10);
+		outColor_Panel.setSize(700, 100);
+		outColor_imageLabel.setLocation(50, 200);
+		outColor_imageLabel.setSize(1000, 400);
+		outColor_next.setLocation(1000, 680);
+		outColor_next.setSize(55, 55);
+		outColor_before.setLocation(50, 680);
+		outColor_before.setSize(55, 55);
+		sum_Label.setLocation(330, 750);
+		sum_Label.setSize(600, 50);
+
+		setSize(1100, 850);
+		setVisible(true);
+
+		outColor_next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new inColor();
+				setVisible(false);
+			}
+		});
+		outColor_before.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new model();
+				setVisible(false);
+			}
+		});
+
+	}
+
+	class MyItemListener implements ItemListener {
+		public void itemStateChanged(ItemEvent e) {
+			for (int i = 0; i < outColor_radio.length; i++) {
+				if (outColor_radio[i].isSelected())
+					outColor_imageLabel.setIcon(outColor_image[i]);
+			}
+			sum_Label.setText("<html>고객님께서 현재까지 선택한 차량의 가격은 " + model.sum + "원 입니다."
+					+ "<br>** 차량의 가격은 할인 및 프로모션 등을 제외한 가격이므로 실구매가는 실제와 다를 수 있습니다. **</html>");
+		}
+	}
+}
