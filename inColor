@@ -1,0 +1,82 @@
+package IONIQ5;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class inColor extends JFrame {
+
+	JRadioButton[] inColor_radio = new JRadioButton[4];
+	JLabel inColor_imageLabel = new JLabel();
+	JLabel sum_Label = new JLabel();
+	String[] inColor_text = { "블랙 모노 톤", "테라 브라운", "다크 틸", "다크 페블 그레이" };
+	ImageIcon[] inColor_image = { new ImageIcon("블랙 모노 톤.jpeg"), new ImageIcon("테라 브라운.jpeg"), new ImageIcon("다크 틸.jpeg"),
+			new ImageIcon("다크 페블 그레이.jpeg") };
+
+	public inColor() {
+		setTitle("내부 색깔 선택");
+		JPanel inColor_Panel = new JPanel();
+		JButton inColor_next = new JButton("다음");
+		JButton inColor_before = new JButton("이전");
+		setBackground(Color.WHITE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		c.setLayout(null);
+
+		MyItemListener listener = new MyItemListener();
+		ButtonGroup inColor_group = new ButtonGroup();
+		for (int i = 0; i < inColor_radio.length; i++) {
+			inColor_radio[i] = new JRadioButton(inColor_text[i]);
+			inColor_group.add(inColor_radio[i]);
+			inColor_Panel.add(inColor_radio[i]);
+			inColor_radio[i].addItemListener(listener);
+		}
+
+		c.add(inColor_Panel);
+		c.add(inColor_imageLabel);
+		c.add(inColor_next);
+		c.add(inColor_before);
+		c.add(sum_Label);
+
+		inColor_Panel.setLocation(300, 10);
+		inColor_Panel.setSize(500, 100);
+		inColor_imageLabel.setLocation(50, 200);
+		inColor_imageLabel.setSize(1000, 400);
+		inColor_next.setLocation(1000, 680);
+		inColor_next.setSize(55, 55);
+		inColor_before.setLocation(50, 680);
+		inColor_before.setSize(55, 55);
+		sum_Label.setLocation(330, 750);
+		sum_Label.setSize(600, 50);
+
+		setSize(1100, 850);
+		setVisible(true);
+
+		inColor_next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new option();
+				setVisible(false);
+			}
+		});
+		inColor_before.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new outColor();
+				setVisible(false);
+			}
+		});
+
+	}
+
+	class MyItemListener implements ItemListener {
+		public void itemStateChanged(ItemEvent e) {
+			for (int i = 0; i < inColor_radio.length; i++) {
+				if (inColor_radio[i].isSelected())
+					inColor_imageLabel.setIcon(inColor_image[i]);
+			}
+			sum_Label.setText("<html>고객님께서 현재까지 선택한 차량의 가격은 " + model.sum + "원 입니다."
+					+ "<br>** 차량의 가격은 할인 및 프로모션 등을 제외한 가격이므로 실구매가는 실제와 다를 수 있습니다. **</html>");
+		}
+	}
+}
